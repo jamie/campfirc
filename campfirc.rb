@@ -27,7 +27,8 @@ campfire.rooms.select{|r| r.name =~ /#/ }.each do |room|
       if m[:person] == CONFIG['campfire']['owner']
         m[:message].gsub!(/\\u0026/, '&')
         puts "CF:  #{channel} #{m[:message].inspect}"
-        next if m[:message] =~ /^has (entered|left) the room$/
+        # "has left the room " has a trailing space, wtf
+        next if m[:message] =~ /^has (entered|left) the room ?$/
         Isaac.bot.msg channel, HTMLEntities.new.decode(m[:message])
       end
     }
