@@ -1,0 +1,9 @@
+campfire:
+  subdomain: foo
+  email: foo@example.com
+  password: pass
+  owner: Mister X.
+irc:
+  server: irc.freenode.net
+  port: 6667
+  nick: foo
