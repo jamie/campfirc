@@ -1,5 +1,6 @@
-require 'rubygems'
 require 'yaml'
+require 'rubygems'
+require 'htmlentities'
 gem 'ichverstehe-isaac', '>= 0.2.5'; require 'isaac'
 gem 'tinder', '>= 1.2.0'; require 'tinder'
 
@@ -24,7 +25,9 @@ campfire.rooms.select{|r| r.name =~ /#/ }.each do |room|
   Thread.new {
     room.listen { |m|
       if m[:person] == CONFIG['campfire']['owner']
-        Isaac.bot.msg channel, m[:message]
+        next if m[:message] =~ /^has (entered|left) the room$/
+        m[:message].gsub!(/\\u0026/, '&')
+        Isaac.bot.msg channel, HTMLEntities.new.decode(m[:message])
       end
     }
   }
