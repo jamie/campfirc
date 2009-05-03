@@ -25,8 +25,9 @@ campfire.rooms.select{|r| r.name =~ /#/ }.each do |room|
   Thread.new {
     room.listen { |m|
       if m[:person] == CONFIG['campfire']['owner']
-        next if m[:message] =~ /^has (entered|left) the room$/
         m[:message].gsub!(/\\u0026/, '&')
+        puts "CF:  #{channel} #{m[:message].inspect}"
+        next if m[:message] =~ /^has (entered|left) the room$/
         Isaac.bot.msg channel, HTMLEntities.new.decode(m[:message])
       end
     }
@@ -51,6 +52,7 @@ end
 
 on :channel do
   msg = message.chomp
+  puts "IRC: #{channel} <#{nick}> #{msg.inspect}"
   $rooms[channel].speak "<#{nick}> #{msg}"
 end
 
