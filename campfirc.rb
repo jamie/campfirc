@@ -3,8 +3,11 @@ require 'yaml'
 gem 'ichverstehe-isaac', '>= 0.2.5'; require 'isaac'
 gem 'tinder', '>= 1.2.0'; require 'tinder'
 
-CONFIG = YAML.load(File.read('config.yml'))
-
+working_dir = File.expand_path(File.dirname(__FILE__))
+CONFIG = YAML.load(File.read(File.join(working_dir, 'config.yml')))
+File.open(File.join(working_dir, 'campfirc.pid'), 'w') do |f|
+  f  << Process.pid
+end
 
 # Campfire
 campfire = Tinder::Campfire.new(CONFIG['campfire']['subdomain'])
