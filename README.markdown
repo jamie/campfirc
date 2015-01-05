@@ -1,3 +1,6 @@
+I'm pretty sure I'm going to be deleting this repo. I don't use it, and nobody else does either.
+
+
 Campfirc is a little script to proxy communication between Campfire and IRC.
 
 It uses [Tinder](http://tinder.rubyforge.org/) to talk to Campfire, and [Isaac](https://github.com/ichverstehe/isaac/) to connect to IRC. Its purpose is to allow an individual (me) to use Campfire as a local IRC log, as well as a mobile client that I can use to maintain context.
